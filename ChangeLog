@@ -1,0 +1,24 @@
+﻿1.1
+- Fixed archive.no-ip.org support
+- Added support for chanarchive.org
+- Added script icon
+- Added @match for Chrome users
+- Should play nicer with 4chan X now that it doesn't rewrite every post's code.  Posts with Vocaroo links will still get broken if this script runs after 4chan X
+
+1.0.3
+- Rewrote site regex selection code to be less resource intensive
+- Rewrote replacement function so it shouldn't be as resource intensive
+- Added support for archive.no-ip.org
+
+1.0.2
+- Added wmode transparent param to help with some Stylish theme issues. Also helps with scrolling and 420chan's menu system
+
+1.0.1
+- Added green-oval.net support
+
+1.0b
+- Fixed CSS style bug
+- Improved support for boards which parse links
+
+1.0
+- Initial release
