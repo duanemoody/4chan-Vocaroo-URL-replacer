@@ -29,7 +29,7 @@
 // @homepage		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer
 // @supportURL		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/issues
 // @updateURL		https://userscripts.org/scripts/source/89348.meta.js
-// @screenshot		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/screenshot.jpg
+// @screenshot		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/screenshot.png
 // @priority		1
 //
 // @include			http://*.2chan.net/*
