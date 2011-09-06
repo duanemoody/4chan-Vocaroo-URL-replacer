@@ -1,13 +1,13 @@
 ﻿4chan Vocaroo URL replacer
 by Scott Steiner <NothingFinerThanScottSteiner@gmail.com>
 
-October 2010 - May 2011
+October 2010 - September 2011
 
 Introduction
 ~~~~~~~~~~~~
 
 This is 4chan Vocaroo URL replacer, a userscript for Firefox, Chrome and Opera.
-It converts text or a link such as http://www.youtube.com/watch?v=9sJUDx7iEJw
+It converts text or a link such as http://vocaroo.com/?media=vT1plxX90UX55rEGT
 into an embedded object for easy playback.
 
 Known bugs
