@@ -1,4 +1,12 @@
-﻿1.1
+﻿2.0
+- Added duplicate object removal
+- Added limit to total number of embedded objects in a thread
+- Added support for easymodo, intallgentoo, 2chan, 7chan and 4chon
+- Removed support for green-oval, which shut down
+- Expanded settings (br before/after embed)
+- Supports 4chan X's thread update feature
+
+1.1
 - Fixed archive.no-ip.org support
 - Added support for chanarchive.org
 - Added script icon
