@@ -22,14 +22,14 @@
 // @id				Vocaroo@ScottSteiner
 // @author			Scott Steiner <nothingfinerthanscottsteiner@gmail.com> http://about.me/ScottSteiner
 // @description		Turns plaintext Vocaroo URLs into embedded objects
-// @version			2.0
+// @version			2.5
 // @copyright		2010-2011, Scott Steiner <nothingfinerthanscottsteiner@gmail.com>
 // @license			GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @icon			https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/icon.jpg
 // @homepage		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer
 // @supportURL		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/issues
 // @updateURL		https://userscripts.org/scripts/source/89348.meta.js
-// @screenshot		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/screenshot.png
+// @screenshot		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/screenshot.jpg
 // @priority		1
 //
 // @include			http://*.2chan.net/*
@@ -45,6 +45,7 @@
 // @include			http://dis.4chan.org/*
 // @include			http://*.krautchan.net/*
 // @include			http://operatorchan.org/*
+// @include			http://*.foolz.us/*
 // @include			http://suptg.thisisnotatrueending.com/archive/*
 //
 // @match			http://*.2chan.net/*
@@ -60,6 +61,7 @@
 // @match			http://dis.4chan.org/*
 // @match			http://*.krautchan.net/*
 // @match			http://operatorchan.org/*
+// @match			http://*.foolz.us/*
 // @match			http://suptg.thisisnotatrueending.com/archive/*
 // ==/UserScript==
 
@@ -77,14 +79,14 @@
 			brAfter:		false
 		}
 	};
-	settings.embed.code = (settings.embed.brBefore ? '<br />' : '') + '<object type="application/x-shockwave-flash" style="width: 148px; height: 44px" data="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0"><"param name="movie" value="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0"</object>' + (settings.embed.brAfter ? '<br />' : '');
-	
-	re.plaintext	= /(?:http.{3}|)(?:www.|)vocaroo.com\/\?media=([\w]{17})(?:<br>|)/g
-	re.linked		= /<a href="(?:http.{3}|)(?:www.|)vocaroo.com\/\?media=.*?"(?: rel="nofollow"|)>(?:http.{3}|)(?:www.|)vocaroo.com\/\?media=([\w]{17}).*<\/a>(?:<br>|)/g
+	settings.embed.code = (settings.embed.brBefore ? '<br />' : '') + '<object type="application/x-shockwave-flash" style="width: 148px; height: 44px" data="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0"><param name="movie" value="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0" /></object>' + (settings.embed.brAfter ? '<br />' : '');
+
+	re.plaintext	= /(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)([\w]+)(?:<br>|)/g
+    re.linked		= /(?:<a href="|)(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)([\w]+)(?:" target="_blank")>(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)(?:[\w]+)<\/a>(?:<br>|)/g
 
 	sites.plaintext	= [/(?:\w*\.2chan\.net|4chanarchive\.org|boards\.4chan\.org|chanarchive\.org|krautchan\.net|suptg\.thisisnotatrueending\.com)/, 'blockquote', re.plaintext];
 	sites.linkedBQ	= [/(?:4chan\.org|archive\.easymodo\.net|archive\.installgentoo\.net|archive\.no-ip\.org|boards\.420chan\.org|operatorchan\.org)/, 'blockquote', re.linked];
-	sites.linkedDiv	= [/(?:7chan\.org)/, 'div', re.linked];
+	sites.linkedDiv	= [/(?:7chan\.org|archive\.foolz\.us)/, 'div', re.linked];
 	sites.linkedP	= [/(?:4chon\.net)/, 'p', re.linked];
 
 	for (i in sites) { if (sites.hasOwnProperty(i)) { if (sites[i][0].exec(document.domain)) { siteArray = sites[i]; break; } } }
