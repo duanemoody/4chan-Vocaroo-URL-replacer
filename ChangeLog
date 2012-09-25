@@ -1,4 +1,8 @@
-﻿2.0
+2.5 (Duane Moody)
+- Added support for foolz.us
+- Updated vocaroo link syntax﻿
+
+2.0
 - Added duplicate object removal
 - Added limit to total number of embedded objects in a thread
 - Added support for easymodo, intallgentoo, 2chan, 7chan and 4chon
