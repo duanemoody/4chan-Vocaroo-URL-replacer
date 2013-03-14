@@ -17,57 +17,72 @@
 */
 
 // ==UserScript==
-// @name			4chan Vocaroo URL Replacer
-// @namespace		http://about.me/ScottSteiner
-// @id				Vocaroo@ScottSteiner
-// @author			Scott Steiner <nothingfinerthanscottsteiner@gmail.com> http://about.me/ScottSteiner
-// @description		Turns plaintext Vocaroo URLs into embedded objects
-// @version			2.5
-// @copyright		2010-2011, Scott Steiner <nothingfinerthanscottsteiner@gmail.com>
-// @license			GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @icon			https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/icon.jpg
-// @homepage		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer
-// @supportURL		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/issues
-// @updateURL		https://userscripts.org/scripts/source/89348.meta.js
-// @screenshot		https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/raw/master/screenshot.jpg
-// @priority		1
+// @name				4chan Vocaroo URL Replacer
+// @namespace			http://about.me/ScottSteiner
+// @id					Vocaroo@ScottSteiner
+// @author				Scott Steiner <nothingfinerthanscottsteiner@gmail.com> http://about.me/ScottSteiner
+// @description			Turns plaintext/linked Vocaroo URLs into embedded objects on 4chan, 7chan, 420chan, operatorchan, krautchan, 2chan and imageboard archives
+// @version				2.0.2
+// @copyright			2010-2013, Scott Steiner <nothingfinerthanscottsteiner@gmail.com>
+// @license				GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
+// @icon				https://raw.github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/master/icon.jpg
+// @homepage			https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer
+// @supportURL			https://github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/issues
+// @updateURL			https://userscripts.org/scripts/source/89348.meta.js
+// @downloadURL			https://userscripts.org/scripts/source/89348.user.js
+// @screenshot			https://raw.github.com/ScottSteiner/4chan-Vocaroo-URL-Replacer/master/screenshot.png
+// @contributionURL		https://steamcommunity.com/id/richardmstallman/wishlist
+// @contributionAmount	Steam games
+// @priority			1
+// @run-at				document-end
 //
-// @include			http://*.2chan.net/*
-// @include			http://7chan.org/*
-// @include			http://*.4chon.net/*
-// @include			http://4chanarchive.org/brchive/*
-// @include			http://archive.easymodo.net/*
-// @include			http://archive.installgentoo.net/cgi-board.pl/*
-// @include			http://archive.no-ip.org/*
-// @include			http://boards.4chan.org/*
-// @include			http://boards.420chan.org/*
-// @include			http://chanarchive.org/*
-// @include			http://dis.4chan.org/*
-// @include			http://*.krautchan.net/*
-// @include			http://operatorchan.org/*
-// @include			http://*.foolz.us/*
-// @include			http://suptg.thisisnotatrueending.com/archive/*
+// @include				http://*.2chan.net/*
+// @include				http*://boards.4chan.org/*
+// @include				http*://dis.4chan.org/*
+// @include				http://*.4chon.net/*
+// @include				http*://7chan.org/*
+// @include				http://boards.420chan.org/*
+// @include				http://*.krautchan.net/*
+// @include				http://*.operatorchan.org/*
+// @include				http://chanarchive.org/*
+// @include				http*://archive.foolz.us/*
+// @include				http*://nsfw.foolz.us/*
+// @include				http*://fuuka.warosu.org/*
+// @include				http://archive.heinessen.com/*
+// @include				http://archive.installgentoo.net/*
+// @include				http*://archive.nyafuu.org/*
+// @include				http*://rbt.asia/*
+// @include				http://archive.thedarkcave.org/*
+// @include				http://suptg.thisisnotatrueending.com/archive/*
 //
-// @match			http://*.2chan.net/*
-// @match			http://*.4chon.net/*
-// @match			http://7chan.org/*
-// @match			http://4chanarchive.org/brchive/*
-// @match			http://archive.easymodo.net/*
-// @match			http://archive.installgentoo.net/cgi-board.pl/*
-// @match			http://archive.no-ip.org/*
-// @match			http://boards.4chan.org/*
-// @match			http://boards.420chan.org/*
-// @match			http://chanarchive.org/*
-// @match			http://dis.4chan.org/*
-// @match			http://*.krautchan.net/*
-// @match			http://operatorchan.org/*
-// @match			http://*.foolz.us/*
-// @match			http://suptg.thisisnotatrueending.com/archive/*
+// @match				http://*.2chan.net/*
+// @match				http://7chan.org/*
+// @match				https://7chan.org/*
+// @match				http://boards.4chan.org/*
+// @match				https://boards.4chan.org/*
+// @match				http://dis.4chan.org/*
+// @match				https://dis.4chan.org/*
+// @match				http://*.4chon.net/*
+// @match				http://boards.420chan.org/*
+// @match				http://*.krautchan.net/*
+// @match				http://*.operatorchan.org/*
+// @match				http://chanarchive.org/*
+// @match				http://archive.foolz.us/*
+// @match				http://fuuka.warosu.org/*
+// @match				https://fuuka.warosu.org/*
+// @match				http://archive.heinessen.com/*
+// @match				http://archive.installgentoo.net/*
+// @match				http://archive.nyafuu.org/*
+// @match				https://archive.nyafuu.org/*
+// @match				http://rbt.asia/*
+// @match				https://rbt.asia/*
+// @match				http://archive.thedarkcave.org/*
+// @match				http://suptg.thisisnotatrueending.com/archive/*
 // ==/UserScript==
 
 (function () {
 	"use strict";
-	var i, embedArray = new Array(0), embedCur = 0, embedTotal = 0, re = {}, settings, sites = {}, siteArray;
+	var embedArray = new Array(0), embedCur = 0, embedTotal = 0, i, timeCheck, timeLastRun, re = {}, settings, sites = {}, siteArray;
 	settings = {
 		filter: {
 			limitPer:		5,
@@ -79,41 +94,62 @@
 			brAfter:		false
 		}
 	};
-	settings.embed.code = (settings.embed.brBefore ? '<br />' : '') + '<object type="application/x-shockwave-flash" style="width: 148px; height: 44px" data="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0"><param name="movie" value="http://vocaroo.com/player.swf?playMediaID=$1&server=m1.vocaroo.com&autoplay=0" /></object>' + (settings.embed.brAfter ? '<br />' : '');
 
-	re.plaintext	= /(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)([\w]+)(?:<br>|)/g
-    re.linked		= /(?:<a href="|)(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)([\w]+)(?:" target="_blank")>(?:http.{3}|)(?:www.|)(?:vocaroo.com\/i\/)(?:[\w]+)<\/a>(?:<br>|)/g
+	settings.embed.code = (settings.embed.brBefore ? '<br />' : '') 
+		+ '<object width="148px" height="44">'
+		+ '<param name="movie" value="http://vocaroo.com/player.swf?playMediaID=$1&amp;autoplay=0"></param>'
+		+ '<param name="wmode" value="transparent"></param>'
+		+ '<embed src="http://vocaroo.com/player.swf?playMediaID=$1&amp;autoplay=0" width="148" height="44" wmode="transparent" type="application/x-shockwave-flash"></embed>'
+		+ '</object>' + (settings.embed.brAfter ? '<br />' : '');
+	
+	re.plaintext	= /(?:http:\/\/|www.)+vocaroo\.com\/i\/([\w]{12})(?:<br>|)/g
+	re.linked		= /<a[^<]+?vocaroo\.com\/i\/([\w]{12})[^>]+>[^<]+?<\/a>(?:<br>|)/g
 
-	sites.plaintext	= [/(?:\w*\.2chan\.net|4chanarchive\.org|boards\.4chan\.org|chanarchive\.org|krautchan\.net|suptg\.thisisnotatrueending\.com)/, 'blockquote', re.plaintext];
-	sites.linkedBQ	= [/(?:4chan\.org|archive\.easymodo\.net|archive\.installgentoo\.net|archive\.no-ip\.org|boards\.420chan\.org|operatorchan\.org)/, 'blockquote', re.linked];
-	sites.linkedDiv	= [/(?:7chan\.org|archive\.foolz\.us)/, 'div', re.linked];
-	sites.linkedP	= [/(?:4chon\.net)/, 'p', re.linked];
+	sites.plaintextBQ	= [/(?:2chan\.net|boards\.4chan\.org|chanarchive\.org|krautchan\.net|suptg\.thisisnotatrueending\.com)/, 'tag', 'blockquote', re.plaintext];
+	sites.linkedBQ		= [/(?:4chan\.org|archive\.installgentoo\.net|boards\.420chan\.org|fuuka\.warosu\.org|operatorchan\.org|rbt\.asia|archive\.nyafuu\.org|archive\.heinessen\.com)/, 'tag', 'blockquote', re.linked];
+	sites.linkedBody	= [/(?:4chon\.net)/, 'class', 'body', re.linked];
+	sites.linkedMessage	= [/(?:7chan\.org)/, 'class', 'message', re.linked];
+	sites.linkedText	= [/(?:(?:archive|nsfw)\.foolz\.us|archive\.thedarkcave\.org)/, 'class', 'text', re.linked];
 
 	for (i in sites) { if (sites.hasOwnProperty(i)) { if (sites[i][0].exec(document.domain)) { siteArray = sites[i]; break; } } }
-	
 	function embedPost(match) {
 		var embedURL;
 		embedTotal++;
 		embedCur++;
-		embedURL = match.replace(siteArray[2], '$1');
+		embedURL = match.replace(siteArray[3], '$1');
 		if ((embedArray.indexOf(embedURL) > -1) && (settings.filter.ignoreDupes)) { return ''; }
 		if (((settings.filter.limitPer < 0) || (embedCur <= settings.filter.limitPer)) && ((settings.filter.limitTotal < 0) || (embedTotal <= settings.filter.limitTotal))) { 
 			embedArray.push(embedURL);
 			return settings.embed.code.replace('$1', embedURL);
-		} else { return match; }
+		}
+		return match;
 	}
 				
 	function embed(n) {
 		if ((typeof k == 'number') && n.target.nodeType !== 1) { return; }
 		var l, posts, temp;
-		posts = document.getElementsByTagName(siteArray[1]);
+		if (siteArray[1] == 'tag') {
+			posts = document.getElementsByTagName(siteArray[2]);
+		} else {
+			posts = document.getElementsByClassName(siteArray[2]);
+		}
 		for (l = 0; l < posts.length; l++) { 
 			embedCur = 0;
 			embedArray.length = 0;
-			temp = posts[l].innerHTML.replace(siteArray[2], embedPost);
-			if (temp !== posts[l].innerHTML) { posts[l].innerHTML = temp; }
+			temp = posts[l].innerHTML.replace('<wbr>','').replace(siteArray[3], embedPost);
+			if (temp !== posts[l].innerHTML.replace('<wbr>','')) { posts[l].innerHTML = temp; }
 		}
 	}
-	document.addEventListener('DOMNodeInserted', embed, true);
+	
+	function nodeInsertedHandler(event) {
+		var foo = new Date; // Generic JS date object
+		var unixtime_ms = foo.getTime(); // Returns milliseconds since the epoch
+		var unixtime = parseInt(unixtime_ms / 1000);
+		//timeCheck = unixtime() - 10;
+		timeCheck = unixtime - 10;
+		if ((event.target.nodeName === "DIV") && (timeCheck >= timeLastRun)) { embed(); }
+	}
+	
 	embed();
+	document.addEventListener('DOMNodeInserted', nodeInsertedHandler, true);
 }());
