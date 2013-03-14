@@ -1,3 +1,8 @@
+2.0.2 (Duane Moody)
+- Corrected param element with superfluous quote mark
+- Updated vocaroo embed code (server no longer necessary)
+- add unixtime variable mentioned in nodeInsertedHandler() function
+
 2.5 (Duane Moody)
 - Added support for foolz.us
 - Updated vocaroo link syntax﻿
